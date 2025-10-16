@@ -40,7 +40,7 @@ def scrape_recent_meetings():
 
 # ===================== SCRAPPED HISTORICAL FOMC MEETINGS ===================== #
 
-def scrape_historical_meetings(start=2000, end=2019):
+def scrape_historical_meetings(start, end):
     base = "https://www.federalreserve.gov/monetarypolicy/fomchistorical{}.htm"
     all_meetings = []
 
@@ -63,11 +63,13 @@ def scrape_historical_meetings(start=2000, end=2019):
 
 
 # ===================== BUILD THE DATASET ===================== #
-print("Scrapping FOMC meeting dates ... ")
-df_recent = scrape_recent_meetings()
-df_hist = scrape_historical_meetings()
-df_all = pd.concat([df_hist, df_recent], ignore_index=True)
-df_all.drop_duplicates(inplace=True)
-df_all.sort_values(by="Meeting Date", inplace=True)
-
-print("Total meetings (historical + recent):", len(df_all))
+def get_FOMC_meeting_dates(start_date=2017,end_date=2019):
+    
+    df_recent = scrape_recent_meetings() # recent data 2020-2025
+    df_hist = scrape_historical_meetings(start_date,end_date) # historical data 2000-2019
+    df_all = pd.concat([df_hist, df_recent], ignore_index=True) # merge recent and historical data
+    df_all.drop_duplicates(inplace=True)
+    df_all.sort_values(by="Meeting Date", inplace=True)
+    
+    return df_all
+    

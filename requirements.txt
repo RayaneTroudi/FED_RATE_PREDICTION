@@ -3,7 +3,4 @@ pandas
 scikit-learn
 matplotlib
 seaborn
-xgboost
-lightgbm
 ipykernel
-jupyter
