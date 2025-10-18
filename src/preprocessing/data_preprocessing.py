@@ -94,4 +94,3 @@ def build_rates_at_meeting_dates():
 
     return df_merged
 
-build_rates_at_meeting_dates()
